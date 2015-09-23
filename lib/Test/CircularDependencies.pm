@@ -10,8 +10,22 @@ Test::CircularDependencies - make sure non of the modules depend on themselves
 
 =head1 SYNOPSIS
 
+  use strict;
+  use warnings;
+  
+  use Test::More tests => 1;
+  use Test::CircularDependencies qw(test_loops);
+  
+  test_loops(['script/my_exe.pl'], ['lib'], 'loops');
+
+
+The command line client can be used like this:
 
   perl -Ilib script/find-circular-dependencies.pl t/circular_dependency/my_exe.pl --dir t/circular_dependency/
+
+Multiple places to look for modules
+
+  perl -Ilib script/find-circular-dependencies.pl t/deep/my_exe.pl --dir t/deep/ --dir t/deep/My/
 
 =head1 DESCRIPTION
 
@@ -20,24 +34,26 @@ Allow the user to restrict the recursion to files found specific directories.
 
 So let's say we have several application in our company and I'd like to make sure there are no circular dependencies.
 
-projectA/
-  lib/A.pm
-  bin/exe.pl
-projectB/
-  lib/
-    B.pm
-    Module/
-      C.pm
-      D.pm
+  projectA/
+    lib/A.pm
+    bin/exe.pl
+  projectB/
+    lib/
+      B.pm
+      Module/
+        C.pm
+        D.pm
 
 but for histoical reasons while C.pm holds 'package Module::C;' D.pm holds 'package D;' so
 when we use this we need to
 
-use lib 'projectA/lib';
-use lib 'projectB/lib';
-use lib 'projectB/lib/Module';
+  use lib 'projectA/lib';
+  use lib 'projectB/lib';
+  use lib 'projectB/lib/Module';
 
-See als L<circular::require>
+=head1 SEE ALSO
+
+L<circular::require>
 
 =head1 AUTHOR
 

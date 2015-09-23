@@ -3,6 +3,8 @@ use 5.010;
 use strict;
 use warnings;
 
+our $VERSION = '0.01';
+
 =head1 NAME
 
 Test::CircularDependencies - make sure non of the modules depend on themselves

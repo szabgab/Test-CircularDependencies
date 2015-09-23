@@ -40,6 +40,17 @@ use lib 'projectB/lib/Module';
 
 See als L<circular::require>
 
+=head1 AUTHOR
+
+L<Gabor Szabo|http://szabgab.com/>
+
+=head1 COPYRIGHT
+
+Copyright 2015 Gabor Szabo, All Rights Reserved.
+
+You may use, modify, and distribute this package under the
+same terms as Perl itself.
+
 =cut
 
 use Carp qw(croak);

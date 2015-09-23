@@ -1,5 +1,4 @@
 package Test::CircularDependencies;
-use 5.010;
 use strict;
 use warnings;
 
@@ -136,23 +135,25 @@ sub test_loops {
 	return not scalar @loops;
 }
 
-sub find_loop {
-    my ($elem) = @_;
-    state @tree;
-    state %in_tree;
-
-    if ($in_tree{$elem}) {
-        push @loops, [@tree, $elem];
-        return;
-    } else {
-        push @tree, $elem;
-        $in_tree{$elem} = 1;
-        foreach my $dep (sort keys %{$depends{$elem} }) {
-            find_loop($dep);
-        }
-        pop @tree;
-        delete $in_tree{$elem};
-    }
+{
+    my @tree;
+    my %in_tree;
+	sub find_loop {
+	    my ($elem) = @_;
+	
+	    if ($in_tree{$elem}) {
+	        push @loops, [@tree, $elem];
+	        return;
+	    } else {
+	        push @tree, $elem;
+	        $in_tree{$elem} = 1;
+	        foreach my $dep (sort keys %{$depends{$elem} }) {
+	            find_loop($dep);
+	        }
+	        pop @tree;
+	        delete $in_tree{$elem};
+	    }
+	}
 }
 
 
@@ -223,5 +224,6 @@ sub is_core
     return $version <= $final_release;
 }
 
+1;
 
 

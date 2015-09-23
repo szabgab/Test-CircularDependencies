@@ -49,9 +49,10 @@ use Module::CoreList ();
 #use Module::Path qw(module_path);
 use Perl::PrereqScanner;
 
-our @EXPORT_OK = qw(find_dependencies);
+our @EXPORT_OK = qw(find_dependencies test_loops);
 
 my %depends;
+my @loops;
 
 ### From here copy of functions from patched version of Module::Path
 ### https://github.com/neilbowers/Module-Path/issues/17
@@ -108,6 +109,21 @@ sub module_path
 ### end of Module::Path code.
 
 
+sub test_loops {
+	my ($input, $dirs, $text) = @_;
+	my @loops = find_dependencies($input, $dirs);
+
+	require Test::Builder;
+	# TODO check if there is a plan already and croak if there is none? or plan if there is none? $Test->plan(@_);
+	my $Test  = Test::Builder->new;
+    $Test->ok( !scalar(@loops), $text );
+	if (@loops) {
+		foreach my $loop (@loops) {
+    		$Test->diag( "Loop found: @$loop" );
+		}
+	}
+	return not scalar @loops;
+}
 
 sub find_loop {
     my ($elem) = @_;
@@ -115,7 +131,7 @@ sub find_loop {
     state %in_tree;
 
     if ($in_tree{$elem}) {
-        warn "Found loop: @tree - $elem\n";
+        push @loops, [@tree, $elem];
         return;
     } else {
         push @tree, $elem;
@@ -129,9 +145,11 @@ sub find_loop {
 }
 
 
-
 sub find_dependencies {
     my ($inputs, $dirs, $verbose) = @_;
+
+	@loops = ();
+	%depends = ();
 
     my @queue;
 
@@ -180,6 +198,7 @@ sub find_dependencies {
         find_loop($root);
         delete $depends{$root}; # so we won't find the same loop multiple times.
     }
+	return @loops;
 }
 
 sub is_core

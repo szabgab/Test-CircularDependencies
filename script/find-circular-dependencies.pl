@@ -8,5 +8,8 @@ use Getopt::Long qw(GetOptions);
 
 GetOptions('dir=s' => \my @dirs);
 
-find_dependencies(\@ARGV, \@dirs);
+my @loops = find_dependencies(\@ARGV, \@dirs);
+foreach my $l (@loops) {
+	print "Found loop: @$l\n";
+}
 

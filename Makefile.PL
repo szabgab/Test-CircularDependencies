@@ -7,6 +7,7 @@ my %conf = (
 	AUTHOR       => 'Gabor Szabo <szabgab@cpan.org>',
 	VERSION_FROM => 'lib/Test/CircularDependencies.pm',
 	ABSTRACT_FROM => 'lib/Test/CircularDependencies.pm',
+	EXE_FILES => ['script/find-circular-dependencies.pl'],
 	PREREQ_PM    => {
 		'Test::Builder'       => 0.01,
 		'Carp'                => 0,

@@ -222,7 +222,7 @@ sub find_dependencies {
 		$depends{$module} = {};
 		my $path = -f $module ? $module : module_path( $module, { dirs => $dirs } );
 		if ( not $path ) {
-			croak "Can't find $module\n";
+			croak __PACKAGE__ . " can't find '$module'\n";
 			next;
 		}
 

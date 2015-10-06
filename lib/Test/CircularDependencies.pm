@@ -21,16 +21,17 @@ Test::CircularDependencies - make sure non of the modules depend on themselves
 
 The command line client can be used like this:
 
-  perl -Ilib script/find-circular-dependencies.pl t/circular_dependency/my_exe.pl --dir t/circular_dependency/
+  find-circular-dependencies.pl t/circular_dependency/my_exe.pl --dir t/circular_dependency/
 
 Multiple places to look for modules
 
-  perl -Ilib script/find-circular-dependencies.pl t/deep/my_exe.pl --dir t/deep/ --dir t/deep/My/
+  find-circular-dependencies.pl t/deep/my_exe.pl --dir t/deep/ --dir t/deep/My/
 
 =head1 DESCRIPTION
 
+
 Given one or more scripts, modules, or directories containing those, create a data structure that represents the dependencies.
-Allow the user to restrict the recursion to files found specific directories.
+Allow the user to restrict the recursion to files found in specific directories.
 
 So let's say we have several application in our company and I'd like to make sure there are no circular dependencies.
 
@@ -54,6 +55,8 @@ when we use this we need to
 =head1 SEE ALSO
 
 L<circular::require>
+
+L<App::PrereqGrapher>
 
 =head1 AUTHOR
 
@@ -174,10 +177,15 @@ sub test_loops {
 
 
 sub find_dependencies {
-    my ($inputs, $dirs, $verbose) = @_;
+    my ($inputs, $dirs, $verbose, $inc) = @_;
 
 	@loops = ();
 	%depends = ();
+
+	my @dirs = @$dirs;
+	if ($inc) {
+		push @dirs, @INC;
+	}
 
     my @queue;
 

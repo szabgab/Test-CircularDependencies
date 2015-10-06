@@ -5,8 +5,7 @@ use warnings;
 
 use MyC;
 
-sub run { say 'MyB' };
+sub run { say 'MyB' }
 
 1;
-
 

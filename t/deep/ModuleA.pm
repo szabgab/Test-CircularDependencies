@@ -5,4 +5,3 @@ use My::ModuleC;
 
 1;
 
-

@@ -1,8 +1,9 @@
+*.swp
+/.tidyall.d/
+/MANIFEST
 /MYMETA.json
 /MYMETA.yml
-/MANIFEST
 /Makefile
+/Test-CircularDependencies-*
 /blib/
 /pm_to_blib
-*.swp
-Test-CircularDependencies-*

@@ -7,17 +7,16 @@ use Test::CircularDependencies qw(find_dependencies);
 use Getopt::Long qw(GetOptions);
 
 GetOptions(
-	'dir=s' => \my @dirs,
+	'dir=s'   => \my @dirs,
 	'verbose' => \my $verbose,
 	'inc'     => \my $inc,
 ) or usage();
 usage('At least one file or directory must be given') if not @ARGV;
 
-my @loops = find_dependencies(\@ARGV, \@dirs, $verbose, $inc);
+my @loops = find_dependencies( \@ARGV, \@dirs, $verbose, $inc );
 foreach my $l (@loops) {
 	print "Found loop: @$l\n";
 }
-
 
 sub usage {
 	my ($msg) = @_;

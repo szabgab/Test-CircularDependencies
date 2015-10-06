@@ -21,6 +21,7 @@ foreach my $l (@loops) {
 
 sub usage {
 	my ($msg) = @_;
+	print "----------------\n";
 
 	if ($msg) {
 		print "\n$msg\n\n";

@@ -9,13 +9,14 @@ my %conf = (
 	ABSTRACT_FROM => 'lib/Test/CircularDependencies.pm',
 	EXE_FILES => ['script/find-circular-dependencies.pl'],
 	PREREQ_PM    => {
-		'Test::Builder'       => 1.001,
-		'Carp'                => 0,
-		'Data::Dumper'        => 0,
-		'Exporter'            => 0,
-		'Module::CoreList'    => 0,
-		'Module::Path'        => 0,
-		'Perl::PrereqScanner' => 0,
+		'Test::Builder'        => 1.001,
+		'Carp'                 => 0,
+		'Data::Dumper'         => 0,
+		'Exporter'             => 0,
+		'Module::CoreList'     => 0,
+		'Module::Path'         => 0,
+		'Perl::PrereqScanner'  => 0,
+		'Path::Iterator::Rule' => 0,
 	},
 );
 

@@ -77,6 +77,7 @@ use Exporter qw(import);
 use Module::CoreList ();
 #use Module::Path qw(module_path);
 use Perl::PrereqScanner;
+use Path::Iterator::Rule;
 
 our @EXPORT_OK = qw(find_dependencies test_loops);
 
@@ -196,7 +197,17 @@ sub find_dependencies {
             next
         }
         if (-d $inp) {
-            croak "Cannot handle directories yet '$inp'.\n";
+			# find all the scripts in the directory tree
+			# find all the modules in the directory tree
+			my $rule = Path::Iterator::Rule->new;
+			for my $file ( $rule->all( $inp ) ) {
+				if ($file =~ /\.pl$/) {
+					push @queue, $file;
+				}
+				if ($file =~ /\.pm$/) {
+					push @queue, $file;
+				}
+    		}
         }
         croak "Invalid argument '$inp' (not file and not directory).\n";
     }

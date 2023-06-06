@@ -71,9 +71,9 @@ same terms as Perl itself.
 
 =cut
 
-use Carp qw(croak);
-use Data::Dumper qw(Dumper);
-use Exporter qw(import);
+use Carp             qw(croak);
+use Data::Dumper     qw(Dumper);
+use Exporter         qw(import);
 use Module::CoreList ();
 
 #use Module::Path qw(module_path);
@@ -253,7 +253,7 @@ sub find_dependencies {
 }
 
 sub is_core {
-	my $module = shift;
+	my $module  = shift;
 	my $version = @_ > 0 ? shift : $^V;
 
 	return 0 unless defined( my $first_release = Module::CoreList::first_release($module) );

@@ -43,7 +43,11 @@ if ( eval { ExtUtils::MakeMaker->VERSION(6.46) } ) {
 }
 
 my %configure_requires = ( 'ExtUtils::MakeMaker' => '6.64', );
-my %build_requires     = ();
+my %build_requires     = (
+        'Test::Code::TidyAll'  => 0,
+        'Test::Perl::Critic'   => 0,
+        'Test::Version'        => 0,
+);
 my %test_requires      = (
 	'Test::More' => '1.00',
 

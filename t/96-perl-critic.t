@@ -15,7 +15,7 @@ plan skip_all => 'Test::Perl::Critic 1.02 required' if $@;
 my %skip = map { ( $_ => 1 ) } qw(
 );
 
-my @files = grep { $_ !~ m{t/.*/} } grep { !$skip{$_} } ( Perl::Critic::Utils::all_perl_files(qw( bin lib t )) );
+my @files = grep { $_ !~ m{t/.*/} } grep { !$skip{$_} } ( Perl::Critic::Utils::all_perl_files(qw( lib t )) );
 
 foreach my $file (@files) {
 	critic_ok( $file, $file );

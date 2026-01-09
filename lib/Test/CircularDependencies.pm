@@ -2,7 +2,7 @@ package Test::CircularDependencies;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 NAME
 
@@ -12,10 +12,10 @@ Test::CircularDependencies - make sure non of the modules depend on themselves
 
   use strict;
   use warnings;
-  
+
   use Test::More tests => 1;
   use Test::CircularDependencies qw(test_loops);
-  
+
   test_loops(['script/my_exe.pl'], ['lib'], 'loops');
 
 

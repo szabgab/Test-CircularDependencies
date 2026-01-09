@@ -30,12 +30,12 @@ if ( eval { ExtUtils::MakeMaker->VERSION(6.46) } ) {
 		resources   => {
 			repository => {
 				type    => 'git',
-				url     => 'http://github.com/szabgab/Test-CircularDependencies.git',
-				web     => 'http://github.com/szabgab/Test-CircularDependencies',
-				license => 'http://dev.perl.org/licenses/',
+				url     => 'https://github.com/szabgab/Test-CircularDependencies.git',
+				web     => 'https://github.com/szabgab/Test-CircularDependencies',
+				license => 'https://dev.perl.org/licenses/',
 			},
 			bugtracker => {
-				web => 'http://github.com/szabgab/Test-CircularDependencies',
+				web => 'https://github.com/szabgab/Test-CircularDependencies',
 			},
 		},
 		x_contributors => [ 'Gabor Szabo <szabgab@cpan.org>', ],

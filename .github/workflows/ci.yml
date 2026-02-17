@@ -5,7 +5,7 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-    - cron: '42 5 * * *'
+    - cron: '42 5 1 * *'
 
 jobs:
   test:
@@ -42,7 +42,7 @@ jobs:
     - name: Install Modules
       run: |
         cpanm -v
-        cpanm --installdeps --with-develop --notest .
+        cpanm --installdeps --with-develop --notest --verbose .
         # --with-configure
         # --with-recommends, --with-suggests
 
